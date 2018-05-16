@@ -24,20 +24,23 @@ def init (A_init, K_init, n_firms_init, im_init, in_init):
     im_firms = {x: [] for x in range (n_firms / 2)}
     [in_firms[x].append([A_i, Q_i, K_i, 0, im_i, in_i]) for x in in_firms]
     [im_firms[x].append([A_i, Q_i, K_i, 0, im_i]) for x in in im_firms]
-    firms = in_firms + im_firms
+    #firms = in_firms + im_firms
     
     
-def Q_updates(firms):
-    for i in firms:
-        firms[i][0][firms[i].index(firms[i][])
+def Q_updates(in_firms, im_firms):
+    global Q_tot
+    Q_tot = 0
+    for i in in_firms:
+        in_firms[i][0][1] = in_firms[i][0][0]*in_firms[i][0][2] 
+        Q_tot = in_firms[i][0][1] + Q_tot
+    for i in im_firms:
+        in_firms[i][0][1] = in_firms[i][0][0]*in_firms[i][0][2] 
+        Q_tot = in_firms[i][0][1] + Q_tot
         
-    
-    global Q_i
-    Q_i = A_i*K_i
-    
     
 def P_update (Q_tot):
     global P
+    
     P = 67./Q_tot
 
     
@@ -68,7 +71,7 @@ def K_update():
 for n in firms_set:
     init(A_init=0.16, K_init=firms_set[n][0], n_firms_init=n, im_init=firms_set[n][1], , in_init=firms_set[n][2])
     
-    Q_updates(A_i=firms[n][0][0] , K_i=firms[n][0][0])
+    Q_updates(in_firms=in_firms, im_firms=im_firms)
     for t in time:
         
     
