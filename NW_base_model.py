@@ -98,13 +98,14 @@ mcs = range (1, 20)
 ###############################################################################
 
 prices = []
-AVG_A = []
-Best_practice = []
+AVG_As = []
+Best_Practices = []
 
 
 i = 1
 while i <= 10:
     price = []
+    AVG_A = []
     for n in firms_set:
         init(A_init=0.16, K_init=firms_set[n][0], n_firms_init=n,\
              im_init=firms_set[n][1], in_init=firms_set[n][2])
@@ -125,7 +126,10 @@ while i <= 10:
             I_updates(in_firms=in_firms, im_firms=im_firms, Q_tot=Q_tot, P=P)
             K_update(in_firms=in_firms, im_firms=im_firms)
         price.append(P)
+        AVG_A.append(np.mean([np.mean([in_firms[x][0][0] for x in in_firms]),\
+                     np.mean([in_firms[x][0][0] for x in im_firms])]))
     prices.append(price)
+    AVG_As.append(AVG_A)
     
     """
     AVG_A.append(np.mean(np.mean([in_firms[x][0][0] for x in in_firms]),
@@ -143,3 +147,18 @@ p32 = np.mean([prices[x][4] for x in range(len(prices))])
 
 plt.plot([2,4,8,16,32], [p2,p4,p8,p16,p32])
 plt.show()
+
+
+
+
+A2 = np.mean([AVG_As[x][0] for x in range(len(AVG_As))])
+A4 = np.mean([AVG_As[x][1] for x in range(len(AVG_As))])
+A8 = np.mean([AVG_As[x][2] for x in range(len(AVG_As))])
+A16 = np.mean([AVG_As[x][3] for x in range(len(AVG_As))])
+A32 = np.mean([AVG_As[x][4] for x in range(len(AVG_As))])
+
+
+plt.plot([2,4,8,16,32], [A2, A4, A8, A16, A32])
+plt.show()
+
+
