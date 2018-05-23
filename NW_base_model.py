@@ -99,13 +99,14 @@ mcs = range (1, 20)
 
 prices = []
 AVG_As = []
-Best_Practices = []
+Best_As = []
 
 
 i = 1
 while i <= 10:
     price = []
     AVG_A = []
+    Best_A =[]
     for n in firms_set:
         init(A_init=0.16, K_init=firms_set[n][0], n_firms_init=n,\
              im_init=firms_set[n][1], in_init=firms_set[n][2])
@@ -128,8 +129,11 @@ while i <= 10:
         price.append(P)
         AVG_A.append(np.mean([np.mean([in_firms[x][0][0] for x in in_firms]),\
                      np.mean([in_firms[x][0][0] for x in im_firms])]))
+        Best_A.append(max(max([in_firms[x][0][0] for x in in_firms]),\
+                          max([in_firms[x][0][0] for x in im_firms])))
     prices.append(price)
     AVG_As.append(AVG_A)
+    Best_As.append(Best_A)
     
     """
     AVG_A.append(np.mean(np.mean([in_firms[x][0][0] for x in in_firms]),
@@ -160,5 +164,19 @@ A32 = np.mean([AVG_As[x][4] for x in range(len(AVG_As))])
 
 plt.plot([2,4,8,16,32], [A2, A4, A8, A16, A32])
 plt.show()
+
+
+best2 = np.mean([Best_As[x][0] for x in range(len(Best_As))])
+best4 = np.mean([Best_As[x][1] for x in range(len(Best_As))])
+best8 = np.mean([Best_As[x][2] for x in range(len(Best_As))])
+best16 = np.mean([Best_As[x][3] for x in range(len(Best_As))])
+best32 = np.mean([Best_As[x][4] for x in range(len(Best_As))])
+
+
+plt.plot([2,4,8,16,32], [best2, best4, best8, best16, best32])
+plt.show()
+
+
+
 
 
