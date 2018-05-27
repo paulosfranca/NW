@@ -1,2 +1,2 @@
 # NW
-Nelson Winter Model for Schumpeterian competition
+Nelson Winter Model for Schumpeterian Competition
